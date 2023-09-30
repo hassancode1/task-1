@@ -13,46 +13,33 @@ import Editquestion from "./Editquestion";
 
 import Plus from "../assets/plus.svg"
 
-type PersonalInformation = {
-  firstName: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  lastName: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  emailId: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  phoneNumber: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  nationality: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  currentResidence: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  idNumber: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  dateOfBirth: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  gender: {
-    internalUse: boolean;
-    show: boolean;
-  };
-};
+type Profileinfo = {
+    education: {
+      internalUse: boolean;
+      show: boolean;
+    };
+    experience: {
+      internalUse: boolean;
+      show: boolean;
+    };
+    resume: {
+      internalUse: boolean;
+      show: boolean;
+    };
+    profileQuestions: {
+      id: string;
+      type: string;
+      question: string;
+      choices: string[];
+      maxChoice: number;
+      disqualify: boolean;
+      other: boolean;
+    }[];
+  
+
+  }
 type PersonalInfoProps = {
-  personalInformation: PersonalInformation;
+    profilevalue: Profileinfo;
 };
 
 
@@ -113,7 +100,7 @@ const initialInputFields: inputFieldType[] = [
   },
 ];
 
-const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInformation }) => {
+const  Profile: React.FC<PersonalInfoProps> = ({ profilevalue }) => {
   const [questionType, setQuestionType] = useState<string>("paragraph");
   const [openQuestion, setOpenQuestion] = useState<boolean>(false);
   const [inputFields, setInputFields] =  useState<inputFieldType[]>(initialInputFields);
@@ -121,16 +108,16 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInformation }) => {
   const [newInputField, setNewInputField] = useState<inputFieldType | null>(null);
   const [savedInputFields, setSavedInputFields] = useState<inputFieldType[]>([]);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [updatedPersonalInformation, setUpdatedPersonalInformation] = useState<PersonalInformation>(personalInformation);
+  const [updatedProfileinfo, setUpdatedProfileinfo] = useState<Profileinfo>(profilevalue);
 
-  console.log(updatedPersonalInformation)
-  const handlePersonalInfo = (field: keyof PersonalInformation, checkboxType: "internalUse" | "show") => {
-    const updatedInfo = { ...updatedPersonalInformation };
-    updatedInfo[field][checkboxType] = !updatedInfo[field][checkboxType];
-    setUpdatedPersonalInformation(updatedInfo);
+  console.log(updatedProfileinfo)
+  const handlePersonalInfo = (field: keyof Profileinfo, checkboxType: "internalUse" | "show") => {
+    const updatedInfo = { ...updatedProfileinfo };
+    (updatedInfo[field] as any)[checkboxType] = !(updatedInfo[field] as any)[checkboxType];
+    
+    setUpdatedProfileinfo(updatedInfo);
   };
-
-
+  
   const handleEdit = (index: number) => {
     setEditIndex(index);
     setOpenQuestion(false)
@@ -339,38 +326,27 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
   return (
     <div className="shadow-md rounded-lg mt-5 bg-white w-96  h-full ">
       <div className="bg-card w-full px-5 py-4 rounded-tl-lg rounded-tr-lg">
-        <h2 className="font-medium"> Personal Information</h2>
+        <h2 className="font-medium"> Profile</h2>
       </div>
       <div className="px-3 mt-4 pb-4 pt-4">
-        <div>
-          <h2 className="font-medium">First Name</h2>
-          <div className="border-b border-gray-300 mb-2 py-2 px-3"></div>
-        </div>
-        <div>
-          <h2 className="font-medium">Last Name</h2>
-          <div className="border-b border-gray-300 mb-2 py-2 px-3"></div>
-        </div>
-        <div>
-          <h2 className="font-medium">Email</h2>
-          <div className="border-b border-gray-300 mb-2 py-2 px-3"></div>
-        </div>
+       
         <div>
           <div className="flex justify-between items-center">
             <div className="flex flex-row gap-2 items-center">
-              <h2 className="font-medium">Phone </h2>
-              <span className="text-sm"> (without dial code)</span>
+              <h2 className="font-medium">education </h2>
+              
             </div>
 
             <div className="flex gap-4 items-center">
-              <Checkbox checked={updatedPersonalInformation.phoneNumber.internalUse}
-                    onChange={() => handlePersonalInfo('phoneNumber', 'internalUse')}
+              <Checkbox checked={updatedProfileinfo.education.internalUse}
+                    onChange={() => handlePersonalInfo('education', 'internalUse')}
 
               >
                 intenal
               </Checkbox>
               <Switch
-                checked={updatedPersonalInformation.phoneNumber.show}
-                onChange={() => handlePersonalInfo('phoneNumber', 'show')}
+                checked={updatedProfileinfo.education.show}
+                onChange={() => handlePersonalInfo('education', 'show')}
                 size="small"
               />
               <span className="text-sm">hide</span>
@@ -381,18 +357,18 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
         <div>
           <div className="flex justify-between items-center">
             <div className="flex flex-row gap-2 items-center">
-              <h2 className="font-medium">Nationality </h2>
+              <h2 className="font-medium">experience </h2>
             </div>
 
             <div className="flex gap-4 items-center">
-              <Checkbox checked={updatedPersonalInformation.nationality.internalUse}
-                 onChange={() => handlePersonalInfo('nationality', 'internalUse')}
+              <Checkbox checked={updatedProfileinfo.experience.internalUse}
+                 onChange={() => handlePersonalInfo('experience', 'internalUse')}
               >
                 intenal
               </Checkbox>
               <Switch
-                checked={updatedPersonalInformation.nationality.show}
-                onChange={() => handlePersonalInfo('nationality', 'show')}
+                checked={updatedProfileinfo.experience.show}
+                onChange={() => handlePersonalInfo('experience', 'show')}
                 size="small"
               />
               <span className="text-sm">hide</span>
@@ -403,19 +379,19 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
         <div>
           <div className="flex justify-between items-center">
             <div className="flex flex-row gap-2 items-center">
-              <h2 className="font-medium">Current Residence </h2>
+              <h2 className="font-medium">resume </h2>
             </div>
 
             <div className="flex gap-4 items-center">
               <Checkbox
-                checked={updatedPersonalInformation.currentResidence.internalUse}
-                onChange={() => handlePersonalInfo('currentResidence', 'internalUse')}
+                checked={updatedProfileinfo.resume.internalUse}
+                onChange={() => handlePersonalInfo('resume', 'internalUse')}
               >
                 intenal
               </Checkbox>
               <Switch
-                checked={updatedPersonalInformation.currentResidence.show}
-                onChange={() => handlePersonalInfo('currentResidence', 'show')}
+                checked={updatedProfileinfo.resume.show}
+                onChange={() => handlePersonalInfo('resume', 'show')}
                 size="small"
               />
               <span className="text-sm">hide</span>
@@ -423,69 +399,7 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
           </div>
           <div className="border-b border-gray-300 mb-2 py-2 px-3"></div>
         </div>
-        <div>
-          <div className="flex justify-between items-center">
-            <div className="flex flex-row gap-2 items-center">
-              <h2 className="font-medium">ID Number </h2>
-            </div>
-
-            <div className="flex gap-4 items-center">
-              <Checkbox checked={updatedPersonalInformation.idNumber.internalUse}
-                onChange={() => handlePersonalInfo('idNumber', 'internalUse')}
-              >
-                intenal
-              </Checkbox>
-              <Switch
-                checked={updatedPersonalInformation.idNumber.show}
-                onChange={() => handlePersonalInfo('idNumber', 'show')}
-                size="small"
-              />
-              <span className="text-sm">hide</span>
-            </div>
-          </div>
-          <div className="border-b border-gray-300 mb-2 py-2 px-3"></div>
-        </div>
-        <div>
-          <div className="flex justify-between items-center">
-            <div className="flex flex-row gap-2 items-center">
-              <h2 className="font-medium">Date Of Birth </h2>
-            </div>
-
-            <div className="flex gap-4 items-center">
-              <Checkbox checked={updatedPersonalInformation.dateOfBirth.internalUse}
-                 onChange={() => handlePersonalInfo('dateOfBirth', 'internalUse')}
-              >
-                intenal
-              </Checkbox>
-              <Switch
-                checked={updatedPersonalInformation.dateOfBirth.show}
-                onChange={() => handlePersonalInfo('dateOfBirth', 'show')}
-                size="small"
-              />
-              <span className="text-sm">hide</span>
-            </div>
-          </div>
-          <div className="border-b border-gray-300 mb-2 py-2 px-3"></div>
-        </div>
-        <div>
-          <div className="flex justify-between items-center">
-            <div className="flex flex-row gap-2 items-center">
-              <h2 className="font-medium">Gender </h2>
-            </div>
-
-            <div className="flex gap-4 items-center">
-              <Checkbox checked={updatedPersonalInformation.gender.internalUse}
-                       onChange={() => handlePersonalInfo('gender', 'internalUse')}
-              >
-                intenal
-              </Checkbox>
-              <Switch checked={updatedPersonalInformation.gender.show} size="small" 
-                   onChange={() => handlePersonalInfo('gender', 'show')}
-              />
-              <span className="text-sm">hide</span>
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       <div className="my-2 px-4">
@@ -578,4 +492,4 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
   );
 };
 
-export default PersonalInfo;
+export default Profile;

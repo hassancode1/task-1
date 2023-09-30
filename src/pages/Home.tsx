@@ -1,99 +1,77 @@
-import {useState, useEffect} from "react"
+
 import Nav from "../components/Nav"
 import Uploadfiles from "../components/Uploadfiles"
 import PersonalInfo from "../components/PersonalInfo"
- 
-interface PersonalInformation {
-  firstName: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  lastName: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  emailId: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  phoneNumber: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  nationality: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  currentResidence: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  idNumber: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  dateOfBirth: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  gender: {
-    internalUse: boolean;
-    show: boolean;
-  };
-  personalQuestions: {
-    id: string;
-    type: string;
-    question: string;
-    choices: string[];
-    maxChoice: number;
-    disqualify: boolean;
-    other: boolean;
-  }[];
-}
-
-interface ApplicationFormData {
-  data: {
-    attributes: {
-      personalInformation: PersonalInformation;
-    };
-  };
-}
-
+import { PersonalInformation, Profileinfo } from "../types/inputFieldType"
+import Profile from "../components/Profile"
+import AdditionalQuestion from "../components/AdditionalQuestion"
 const Home = () => {
-  const url = "http://127.0.0.1:4010/api/682.5711574446319/programs/ut/application-form"
-  const [data, setData] = useState<ApplicationFormData | null>(null);
-
-  async function fetchData() {
-    try {
-   
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setData(data);
-    } catch (error) {
-     
-    } 
+  const initialProfile : Profileinfo= {
+    education: {
+      internalUse: false,
+      show: false,
+    },
+    experience: {
+      internalUse: false,
+      show: false,
+    },
+    resume: {
+      internalUse: false,
+      show: false,
+    },
+    profileQuestions:[]
+  
   }
+ 
+  const initialPersonalInformation: PersonalInformation = {
+    firstName: {
+      internalUse: false,
+      show: false,
+    },
+    lastName: {
+      internalUse: false,
+      show: false,
+    },
+    emailId: {
+      internalUse: false,
+      show: false,
+    },
+    phoneNumber: {
+      internalUse: false,
+      show: false,
+    },
+    nationality: {
+      internalUse: false,
+      show: false,
+    },
+    currentResidence: {
+      internalUse: false,
+      show: false,
+    },
+    idNumber: {
+      internalUse: false,
+      show: false,
+    },
+    dateOfBirth: {
+      internalUse: false,
+      show: false,
+    },
+    gender: {
+      internalUse: false,
+      show: false,
+    },
+    personalQuestions: [],
+  };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <>
     <div className="flex flex-col gap-4 justify-between">
   <Nav />
 <Uploadfiles />
-{data?.data?.attributes?.personalInformation ? (
-          <PersonalInfo personalInformation={data.data.attributes.personalInformation} />
-        ) : (
-         
-      null
-        )}
+<PersonalInfo personalInformation={initialPersonalInformation} />      
+<Profile  profilevalue={initialProfile} />    
+<AdditionalQuestion/> 
   </div>
     </>
   )
