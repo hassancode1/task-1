@@ -1,0 +1,64 @@
+
+body{
+  background-color: white;
+}
+.App{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+.AppHeader{
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 20px 4px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.AppFooter{
+height: 50px;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+border-top: 1px solid rgba(0, 0, 0, 0.15);
+
+}
+.SideMenuAndPageContent{
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white ;
+}
+.SideMenu{
+  height: 100%;
+background-color: white;
+z-index: 100;
+}
+.SideMenuVertical{
+    height: 100%;
+    display: flex;
+    /* margin-top: 2rem; */
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.PageContent{
+  padding-left: 12px;
+  display: flex;
+  margin:  3rem 3rem;
+  width: 100%;
+  background-color: white;
+}
+.shadow{
+box-shadow: 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color:#087B2F;
+  border-color: #087B2F;
+}
+.ant-switch-checked{
+  background:#087B2F !important;
+}
