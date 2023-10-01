@@ -456,6 +456,10 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
                 { value: "Yes/No", label: "Yes/No" },
                 { value: "dropdown", label: "Dropdown" },
                 { value: "MultipleChoice", label: "Multiple Choice" },
+               
+                { value: "fileupload", label: "File upload" },
+                { value: "number", label: "Number" },
+                { value: "date", label: "Date" },
            
               ]}
             />

@@ -70,6 +70,33 @@ const initialInputFields: inputFieldType[] = [
     disqualify: false,
     other: false,
   },
+  {
+    id: uuidv4(),
+    type: "fileupload",
+    question: "",
+    maxChoice: 0,
+    choices: [""],
+    disqualify: false,
+    other: false,
+  },
+  {
+    id: uuidv4(),
+    type: "number",
+    question: "",
+    maxChoice: 0,
+    choices: [""],
+    disqualify: false,
+    other: false,
+  },
+  {
+    id: uuidv4(),
+    type: "date",
+    question: "",
+    maxChoice: 0,
+    choices: [""],
+    disqualify: false,
+    other: false,
+  },
 ];
 
 const AdditionalQuestion = () => {
@@ -347,6 +374,10 @@ setInputFields(initialInputFields.map((field) => ({ ...field })));
                 { value: "Yes/No", label: "Yes/No" },
                 { value: "dropdown", label: "Dropdown" },
                 { value: "MultipleChoice", label: "Multiple Choice" },
+                
+                { value: "fileupload", label: "File upload" },
+                { value: "number", label: "Number" },
+                { value: "date", label: "Date" },
            
               ]}
             />

@@ -49,7 +49,8 @@ const Addquestion: React.FC<AddQuestionProps> = ({
                 />
               </div>
             );
-          } else if (
+          }
+           else if (
             questionType === "MultipleChoice" &&
             field.type === "MultipleChoice"
           ) {
@@ -138,6 +139,57 @@ const Addquestion: React.FC<AddQuestionProps> = ({
                 >
                 Disqualify candidate if the answer is no
               </Checkbox>
+             </>;
+          }
+          else if (
+            questionType === "fileupload" &&
+            field.type === "fileupload"
+          ) {
+            return <>
+              <h2 className="my-2 font-bold">Question</h2>
+            <Input
+                  placeholder="Type here"
+                  style={{ width: "100%" }}
+                  value={inputFields[index].question}
+                  onChange={(e) =>
+                    handleInputChange(index, "question", e.target.value)
+                  }
+                />
+               
+             </>;
+          }
+          else if (
+            questionType === "number" &&
+            field.type === "number"
+          ) {
+            return <>
+              <h2 className="my-2 font-bold">Question</h2>
+            <Input
+                  placeholder="Type here"
+                  style={{ width: "100%" }}
+                  value={inputFields[index].question}
+                  onChange={(e) =>
+                    handleInputChange(index, "question", e.target.value)
+                  }
+                />
+               
+             </>;
+          }
+          else if (
+            questionType === "date" &&
+            field.type === "date"
+          ) {
+            return <>
+              <h2 className="my-2 font-bold">Question</h2>
+            <Input
+                  placeholder="Type here"
+                  style={{ width: "100%" }}
+                  value={inputFields[index].question}
+                  onChange={(e) =>
+                    handleInputChange(index, "question", e.target.value)
+                  }
+                />
+               
              </>;
           }
         else if (
